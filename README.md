@@ -4,6 +4,18 @@ PV_Packer - simple pure Pascal library to pack files to various archives (ZIP, R
 See also:
 https://github.com/PascalVault/Lazarus_Unpacker
 
+## Supported formats ##
+- ZIP
+- TAR
+- RAR
+- ARJ
+- BH
+- LZH
+
+## Unsupported ##
+- encryption
+- compression (comming soon...)
+
 ## Usage ##
     uses PV_Packer;
     ...
