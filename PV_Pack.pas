@@ -17,7 +17,7 @@ type
 
   TPack = class
   private
-   FStream: TStream;
+    FStream: TStream;
   public
     constructor Create(Str: TStream); virtual; abstract;
     destructor Destroy; virtual; abstract;
@@ -50,6 +50,7 @@ type
 
   function DosTime(Time: TDateTime = -1): Word;
   function DosDate(Time: TDateTime = -1): Word;
+  function UnixStamp(Time: TDateTime = -1): Int64;
 
 implementation
 
@@ -67,6 +68,12 @@ begin
   if Time = -1 then Time := Now();
   Temp := DateTimeToDosDateTime(Time);
   Result := Temp shr 16;
+end;
+
+function UnixStamp(Time: TDateTime): Int64;
+begin
+  if Time = -1 then Time := Now();
+  Result := DateTimeToUnix(Time, True);
 end;
 
 { TFileList }
