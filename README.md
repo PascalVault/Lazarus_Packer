@@ -8,6 +8,7 @@ https://github.com/PascalVault/Lazarus_Unpacker
     uses PV_Packer;
     ...
     var Zip: TPacker; 
+    begin
     Zip := TPacker.Create('out.tar', 'tar');
     Zip.SetComment('Created by PV_Packer'); //not all formats support comments yet
 
