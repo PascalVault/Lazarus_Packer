@@ -7,16 +7,15 @@ https://github.com/PascalVault/Lazarus_Unpacker
 ## Supported formats ##
 - .ZIP
 - .TAR
-- .RAR
-- .ARJ
-- .BH (can be opened with IZarc)
-- .LZH .LHA
+- .RAR (method "store")
+- .ARJ (method "store")
+- .LZH .LHA (method "store")
 - .BZA .GZA
-- .ZOO (can be opened with IZarc)
+- .BH (method "store")
+- .ZOO (can be opened with IZarc) (method "store")
 
 ## Unsupported ##
 - encryption
-- compression (comming soon...)
 
 ## Usage ##
     uses PV_Packer;
