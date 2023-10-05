@@ -5,13 +5,14 @@ See also:
 https://github.com/PascalVault/Lazarus_Unpacker
 
 ## Supported formats ##
-- ZIP
-- TAR
-- RAR
-- ARJ
-- BH (can be opened with IZarc)
-- LZH
-- ZOO (can be opened with IZarc)
+- .ZIP
+- .TAR
+- .RAR
+- .ARJ
+- .BH (can be opened with IZarc)
+- .LZH .LHA
+- .BZA .GZA
+- .ZOO (can be opened with IZarc)
 
 ## Unsupported ##
 - encryption
