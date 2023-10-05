@@ -9,8 +9,9 @@ https://github.com/PascalVault/Lazarus_Unpacker
 - TAR
 - RAR
 - ARJ
-- BH
+- BH (can be opened with IZarc)
 - LZH
+- ZOO (can be opened with IZarc)
 
 ## Unsupported ##
 - encryption
