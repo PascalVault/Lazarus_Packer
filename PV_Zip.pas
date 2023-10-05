@@ -4,13 +4,13 @@ unit PV_Zip;
 //PV Pack
 //https://github.com/PascalVault
 //Licence: MIT
-//Last update: 2023-10-04
+//Last update: 2023-10-06
 //PK ZIP
 
 interface
 
 uses
-  Classes, SysUtils, Dialogs, CRC32_ISOHDLC, PV_Pack;
+  Classes, SysUtils, Dialogs, CRC32_ISOHDLC, PV_Pack, PV_Compressor;
 
 type
 
@@ -148,6 +148,7 @@ var Head: THead;
     ReadLen: Integer;
     FinalOffset: Cardinal;
     CRC: Cardinal;
+    Deflate: TCompressorDeflate;
 begin
   HeadLen := SizeOf(Head) + Length(Name);
 
@@ -159,14 +160,18 @@ begin
   //copy data and calculate checksum
   Hasher := TCRC32_ISO.Create;
 
+  Deflate := TCompressorDeflate.Create(FStream);
+
   SetLength(Buf, BufLen);
   while Str.Position < Str.Size do begin
     ReadLen := Str.Read(Buf[0], BufLen);
 
     Hasher.Update(@Buf[0], ReadLen);
 
-    FStream.Write(Buf[0], ReadLen);
+    //FStream.Write(Buf[0], ReadLen);
+    Deflate.Write(Buf[0], ReadLen);
   end;
+  Deflate.Free;
 
   PackSize := FStream.Position - DataOffset;
   FinalOffset := FStream.Position;
@@ -181,7 +186,7 @@ begin
     Magic          := $04034b50;
     MinimumVersion := 10;
     GeneralFlag    := 0;
-    Compression    := 0;
+    Compression    := 8; //8= deflate, 0=store
     ModTime        := DosTime;
     ModDate        := DosDate;
     CRC32          := CRC;
