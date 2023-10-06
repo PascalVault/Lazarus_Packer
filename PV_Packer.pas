@@ -4,7 +4,7 @@ unit PV_Packer;
 //PV Pack
 //https://github.com/PascalVault
 //Licence: MIT
-//Last update: 2023-10-04
+//Last update: 2023-10-06
 
 interface
 
@@ -31,7 +31,7 @@ type
 
 implementation
 
-uses PV_Zip, PV_BH, PV_Bga, PV_Tar, PV_Lzh, PV_Arj, PV_Rar;
+uses PV_Zip, PV_BH, PV_Bga, PV_Tar, PV_Lzh, PV_Arj, PV_Rar, PV_Zoo, PV_Gzip;
 
 { TPacker }
 
@@ -47,7 +47,8 @@ begin
    'arj': FObj := TArj.Create(Str);
    'tar': FObj := TTar.Create(Str);
    'rar': FObj := TRar.Create(Str);
-   //'zoo' : FObj := TZoo.Create(Str);
+   'zoo': FObj := TZoo.Create(Str);
+   'gz':  FObj := TGzip.Create(Str);
   end;
 end;
 
@@ -61,6 +62,7 @@ end;
 destructor TPacker.Destroy;
 begin
   FObj.Destroy;
+  if FFile <> nil then FFile.Free;
 end;
 
 function TPacker.AddFile(Str: TStream; Name: String): Boolean;
