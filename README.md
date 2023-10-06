@@ -7,14 +7,15 @@ https://github.com/PascalVault/Lazarus_Unpacker
 ## Supported formats ##
 - .ZIP
 - .TAR
+- .GZ
+- .GZA
 - .RAR (method "store")
 - .ARJ (method "store")
 - .LZH .LHA (method "store")
-- .BZA .GZA
 - .BH (method "store")
 - .ZOO (can be opened with IZarc) (method "store")
 
-## Unsupported ##
+## Unsupported, yet ##
 - encryption
 
 ## Usage ##
@@ -29,3 +30,16 @@ https://github.com/PascalVault/Lazarus_Unpacker
     Zip.AddFile('input file.txt');
 
     Zip.Free;      
+
+## Usage - GZIP ##
+    uses PV_Packer;
+    ...
+    var Zip: TPacker; 
+    begin
+    Zip := TPacker.Create('out.gz', 'gz');
+    Zip.SetComment('Created by PV_Packer'); 
+
+    Zip.AddFile('input file.txt', 'name in the archive.txt');
+    Zip.AddFile('input file.txt'); //this returns False because there can be only 1 file in .GZIP
+
+    Zip.Free;  
