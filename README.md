@@ -13,6 +13,7 @@ https://github.com/PascalVault/Lazarus_Unpacker
 - .ARJ (method "store")
 - .LZH .LHA (method "store")
 - .BH (method "store")
+- .ARC (method "store")
 - .ZOO (can be opened with IZarc) (method "store")
 
 ## Unsupported, yet ##
