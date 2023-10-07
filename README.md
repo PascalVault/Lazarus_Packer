@@ -11,6 +11,7 @@ https://github.com/PascalVault/Lazarus_Unpacker
 - .GZA
 - .RAR (method "store")
 - .ARJ (method "store")
+- .ACE (method "store")
 - .LZH .LHA (method "store")
 - .BH (method "store")
 - .ARC (method "store")
