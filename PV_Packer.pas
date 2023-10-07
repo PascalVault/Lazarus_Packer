@@ -31,7 +31,7 @@ type
 
 implementation
 
-uses PV_Zip, PV_BH, PV_Bga, PV_Tar, PV_Lzh, PV_Arj, PV_Rar, PV_Zoo, PV_Gzip;
+uses PV_Zip, PV_BH, PV_Bga, PV_Tar, PV_Lzh, PV_Arj, PV_Rar, PV_Zoo, PV_Gzip, PV_Arc, PV_Ace;
 
 { TPacker }
 
@@ -48,6 +48,8 @@ begin
    'tar': FObj := TTar.Create(Str);
    'rar': FObj := TRar.Create(Str);
    'zoo': FObj := TZoo.Create(Str);
+   'arc': FObj := TArc.Create(Str);
+   'ace': FObj := TAce.Create(Str);
    'gz':  FObj := TGzip.Create(Str);
   end;
 end;
