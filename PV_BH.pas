@@ -10,7 +10,7 @@ unit PV_BH;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, CRC32_ISOHDLC, PV_Pack;
+  Classes, SysUtils, Dialogs, CRC32_ISOHDLC, PV_Pack, PV_Compressor;
 
 type
 
@@ -73,6 +73,7 @@ var Head: THead;
     ReadLen: Integer;
     FinalOffset: Cardinal;
     CRC: Cardinal;
+    Deflate: TCompressorDeflate;
 begin
   HeadLen := SizeOf(Head) + Length(Name);
 
@@ -84,14 +85,18 @@ begin
   //copy data and calculate checksum
   Hasher := TCRC32_ISO.Create;
 
+  Deflate := TCompressorDeflate.Create(FStream);
+
   SetLength(Buf, BufLen);
   while Str.Position < Str.Size do begin
     ReadLen := Str.Read(Buf[0], BufLen);
 
     Hasher.Update(@Buf[0], ReadLen);
 
-    FStream.Write(Buf[0], ReadLen);
+    //FStream.Write(Buf[0], ReadLen);
+    Deflate.Write(Buf[0], ReadLen);
   end;
+  Deflate.Free;
 
   PackSize := FStream.Position - DataOffset;
   FinalOffset := FStream.Position;
@@ -109,10 +114,10 @@ begin
     VerNum      := 218;
     MinVerNum   := 4;
     BitFlag     := 0;
-    Compression := 0;       //0= store, 8=deflate
+    Compression := 8;       //0= store, 8=deflate
     FileTime    := DosTime;
     FileDate    := DosDate;
-    PackedSize  := Str.Size;
+    PackedSize  := PackSize;
     UnpackedSize:= Str.Size;
     CRC32        := CRC;
     ExternalAttr := 8224; //?
